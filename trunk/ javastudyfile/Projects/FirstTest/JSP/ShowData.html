@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<form>
+		<table border="1px">
+			<tr>
+				<td><input style="width:150px;" type="text" name="userName" value="${userName}"></td>
+			</tr>
+			<tr>
+				<td><input style="width:150px;" type="text" name="passWord" value="${passWord}"></td>
+			</tr>			
+		</table>
+		<table border="1px">
+			<!-- ArrayList 分组功能 6个一组 不足的以‘-’填补-->
+			<#list arrayList?chunk(6, '-') as vals>
+			<tr>
+				<#list vals as cell>
+				<td style="width:50px;" >${vals_index}+${cell}</td>
+				</#list>
+			</tr>
+			</#list>
+		</table>
+		<table>
+			<tr>
+				<td>
+				<select >
+					<#list userList as singleUser>
+					<option value="${singleUser[0]}">${singleUser[1]}</option>
+					</#list>
+				</select>
+				<select style="height:200px" multiple="multiple">
+					<#list userList as singleUser>
+					<option value="${singleUser[0]}">${singleUser[1]}</option>
+					</#list>
+				</select>
+				</td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>
