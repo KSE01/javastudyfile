@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<DataBase>
+		<url>jdbc:sqlserver://</url>
+		<serverName>172.18.1.16</serverName>
+		<dbName>dbemployee1</dbName>
+		<portNumber>1433</portNumber>
+		<userName>sa</userName>
+		<passWord></passWord>
+	</DataBase>
+	<DataBase>
+		<dbserver>dbserver</dbserver>
+		<username>username</username>
+		<password>password</password>
+	</DataBase>
+	<Node1>
+		<dbserver>txt1</dbserver>
+		<txt2>txt2</txt2>
+		<txt3>txt3</txt3>
+		<txt4>txt4</txt4>
+	</Node1>
+</root>
+
