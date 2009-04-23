@@ -3,11 +3,8 @@ package tre.dalian.ito.action.way2;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
 import org.apache.struts2.ServletActionContext;
-
 import tre.dalian.ito.model.User;
-
 import com.opensymphony.xwork2.Action;
 
 public class LoginAction3 implements Action
