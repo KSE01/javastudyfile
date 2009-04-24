@@ -8,19 +8,19 @@
 	<form>
 		<table>
 			<tr>
-				<td>类型ID</td>
-				<td>类型名</td>
-				<td>登录者</td>
-				<td>登录日期</td>
-				<td>是否有效</td>
+				<td style="text-align:center">类型ID</td>
+				<td style="text-align:center">类型名</td>
+				<td style="text-align:center">登录者</td>
+				<td style="text-align:center">登录日期</td>
+				<td style="text-align:center">是否有效</td>
 			</tr>
 			<#list codeTypeList as ct>
 			<tr>
-				<td>${ct.typeId}</td>
-				<td>${ct.typeName}</td>
-				<td>${ct.creator}</td>
-				<td>${ct.createDate}</td>
-				<td><#if ct.showFlg="1">有効<#else>無効</#if></td>
+				<td style="text-align:center">${ct.typeId}</td>
+				<td style="text-align:center">${ct.typeName}</td>
+				<td style="text-align:center">${ct.creator}</td>
+				<td style="text-align:center">${ct.createDate}</td>
+				<td style="text-align:center"><#if ct.showFlg="1">有効<#else>無効</#if></td>
 			</tr>
 			</#list>			
 		</table>

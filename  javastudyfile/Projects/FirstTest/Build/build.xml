@@ -1,0 +1,104 @@
+<project name="blank" basedir="../" default="all">
+
+	<property file="Build/build.properties"/>
+	<property name="src.dir"       value="WEB-INF/src"/>
+	<property name="class.dir"     value="WEB-INF/classes"/>
+	<property name="weblib.dir"    value="WEB-INF/lib"/>
+	<property name="deploy.dir"    value="Build"/>
+	<property name="jar.dir"       value="${deploy.dir}/jar"/>
+	<property name="war.dir"       value="${deploy.dir}/war"/>
+    <property name="project.distname" value="FirstTest"/>
+	<property name="build.tomcatHomeDir" value="../../tomcat6.0.18"/>
+	<property name="compile.encoding" value="utf-8"/>
+
+    <!-- classpath for Struts 2 -->
+    <path id="compile.classpath">
+        <fileset dir ="${build.tomcatHomeDir}/lib" includes="*.jar"/>
+        <fileset dir="${weblib.dir}" includes="*.jar"/>
+    </path>
+
+    <!-- Check timestamp on files -->
+    <target name="prepare">
+        <tstamp/>
+    </target>
+
+
+    <!-- Copy any resource or configuration files -->
+    <target name="resources">
+        <copy todir="${class.dir}" includeEmptyDirs="no">
+            <fileset dir="${src.dir}">
+            <patternset>
+                <include name="**/*.conf"/>
+                <include name="**/*.properties"/>
+                <include name="**/*.xml"/>
+            </patternset>
+            </fileset>
+        </copy>
+    </target>
+
+
+    <!-- Normal build of application -->
+    <target name="compile" depends="prepare,resources">    	
+        <javac srcdir="${src.dir}" destdir="${class.dir}"
+        	classpathref="compile.classpath"
+            encoding="${compile.encoding}"
+            debug="${compile.debug}">
+        </javac>
+    </target>
+
+
+    <!-- Remove classes directory for clean build -->
+    <target name="clean" description="Prepare for clean build">
+      <delete dir="${class.dir}"/>
+      <mkdir  dir="${class.dir}"/>
+    </target>
+
+
+    <!-- Build entire project -->
+    <target name="project" depends="clean,prepare,compile"/>
+
+
+    <target name="jar" description="jarファイル生成">
+
+	  <delete file="${jar.dir}/${project.distname}.jar" />
+  	  <jar destfile="${jar.dir}/${project.distname}.jar">
+  	  	<metainf dir="${jar.dir}/META-INF" />
+  	    <fileset dir="${class.dir}" 
+  	               includes="trial/**/*.class"/> 
+          <fileset dir="${class.dir}" 
+  	               includes="filters/*.class"/> 
+  	    <fileset dir="${jar.dir}" includes="META-INF/**"/> 
+  	  </jar>
+    </target>
+
+
+	<!-- Create binary distribution -->
+    <target name="war" description="warファイル生成">
+
+        <delete file="${war.dir}/${project.distname}.war" />
+        <manifest file="${war.dir}/META-INF/MANIFEST.MF" mode="replace">
+          <Attribute name="Class-Path" 
+            value="commons-beanutils-1.7.0.jar commons-chain-1.1.jar commons-lang-2.1.jar commons-logging 1.0.4.jar commons-validator-1.3.0.jar dsn.jar dwr.jar freemarker-2.3.8.jar imap.jar mail.jar mailapi.jar ognl-2.6.11.jar pop3.jar postgresql-8.3-603.jdbc4.jar smtp.jar struts2-core-2.0.11.2.jar xwork-2.0.5.jar dom4j-1.6.1.jar"/>
+        </manifest>
+        <war
+          warfile="${war.dir}/${project.distname}.war"
+          webxml="WEB-INF/web.xml"
+      	manifest="${war.dir}/META-INF/MANIFEST.MF">
+          <fileset dir="." 
+          	includes="attachFiles,WEB-INF/**,JSP/**,Schema/**,img/**,Properties/**,Logs/**"
+          	excludes="Build/**, javadoc/**, WEB-INF/web.xml " />
+        </war>
+    </target>
+
+    <target name="deploy" description="APサーバに配備">
+        <delete file="${build.tomcatHomeDir}/webapps/${project.distname}.war" />
+	    <copy file="${war.dir}/${project.distname}.war"
+	          todir="${build.tomcatHomeDir}/webapps" overwrite="true"/>
+	</target>
+
+
+    <!-- Build project and create distribution-->
+    <target name="all" depends="project,jar,war"/>
+	<!--target name="all" depends="project,jar,war,deploy"/-->
+
+</project>
