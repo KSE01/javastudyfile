@@ -1,11 +1,11 @@
-package com.tre.test;
+package com.tre.test.action;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-public class ShowData extends ActionSupport {
+public class ShowDataAction extends ActionSupport {
 
 	/**
 	 * 

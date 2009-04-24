@@ -3,10 +3,10 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathFactory;
 
+import org.apache.struts2.ServletActionContext;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
-
 public class XmlRead {
 
 	/**
@@ -23,12 +23,9 @@ public class XmlRead {
 	 * @param <code>String<code> XML文件相对于工程目录的路径
 	 */
 	public XmlRead(String filePath) {
-		sysPath = System.getProperty("user.dir");
-		if(filePath.substring(0, 1).indexOf('\\')>0){
-			xmlFilePath = 	sysPath+filePath;
-		} else {
-			xmlFilePath = 	sysPath+"\\"+filePath;
-		}
+		sysPath = ServletActionContext.getServletContext().getRealPath("/");
+		xmlFilePath = 	sysPath+filePath;
+		
 	}
 
 	/**
