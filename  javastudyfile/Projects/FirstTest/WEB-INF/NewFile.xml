@@ -3,7 +3,7 @@
 	<DataBase>
 		<url>jdbc:sqlserver://</url>
 		<serverName>172.18.1.16</serverName>
-		<dbName>dbemployee1</dbName>
+		<dbName>CodeLibrary</dbName>
 		<portNumber>1433</portNumber>
 		<userName>sa</userName>
 		<passWord></passWord>

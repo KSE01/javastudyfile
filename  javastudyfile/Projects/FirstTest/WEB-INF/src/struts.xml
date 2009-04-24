@@ -5,8 +5,11 @@
 
 <struts>
 	<package name="struts" extends="struts-default">
-		<action name="show" class = "com.tre.test.ShowData">
+		<action name="show" class = "com.tre.test.action.ShowDataAction">
 			<result name="success" type="freemarker">/JSP/ShowData.html</result>
+		</action>
+		<action name="dbshow" class = "com.tre.test.action.DBShowDataAction">
+			<result name="success" type="freemarker">/JSP/DBDataTest.html</result>
 		</action>
 	</package>
 </struts>
