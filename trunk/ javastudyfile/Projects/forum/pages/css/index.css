@@ -1,0 +1,9 @@
+.jive-clearfix:after {
+  content: ".";
+  clear: both;
+  height: 0;
+  visibility: hidden;
+  display: block;
+}
+
+.jive-acc-login {padding-left: 18px !important; background: url(../images/login-16x16.gif) no-repeat;}

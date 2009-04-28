@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="default" extends="struts-default">
+	
+	   <!-- 用户登录  2009年4月14     -->
+		<action name="login" class="tre.dalian.ito.action.LoginAction">
+            <result name="success">/pages/articleFlat.jsp</result>
+            <result name="error">/pages/error.jsp</result>
+            <result name="input">/pages/index.jsp</result>
+        </action>
+        <!--  用户注册   2009年4月14     -->
+        <action name="register" class="tre.dalian.ito.action.RegisterAction">
+            <result name="success" >/pages/articleFlat.jsp</result>
+            <result name="error">/pages/error.jsp</result>
+            <result name="input">/pages/register.jsp</result>
+        </action>
+        <action name="changeregister">
+        	<result name="success">/pages/register.jsp</result>
+        </action>
+        <action name="backarticle">
+        	<result name="success">/pages/articleFlat.jsp</result>
+        </action>
+        <action name="editor" class="tre.dalian.ito.action.EditorPictureAction">
+        	<interceptor-ref name ="fileUploadStack" /> 
+        	<result name="success">/pages/return.jsp</result>
+        </action>
+		<!-- =============主题发布回复 趙聖龍　２００９年４月１３日　月曜日==================== -->
+		<!-- 发布新主题 -->
+		<action name="addSubject" class="tre.dalian.ito.action.NewSubjectAction">
+			<result name="success">/pages/articleFlat.jsp</result>
+		</action>
+		<action name="changeaddSubject">
+			<result name="success">/pages/newSubject.jsp</result>
+		</action>
+		<!-- 回复主题 -->
+		<action name="replySubject" class="tre.dalian.ito.action.ReplySubjectAction">
+			<result name="success" type="redirect">subjectDetail.action?id=${id}</result>
+		</action>
+		<!-- 主题详细 -->
+		<action name="subjectDetail" class="tre.dalian.ito.action.SubjectDetailAction">
+			<result name="success">/pages/subjectDetail.jsp</result>
+		</action>
+		<!-- ==============    主题发布回复完了     ====================================== -->
+	</package>
+	<!-- 注册检查 -->
+    <package name="struts-ajax" extends="json-default">
+        <action name="checkUser" class="tre.dalian.ito.service.Check"
+            method="checkUser">
+            <result type="json" />
+        </action>
+        <action name="checkPassword" class="tre.dalian.ito.service.Check"
+            method="checkPassword">
+            <result type="json" />
+        </action>
+        <action name="article" class="tre.dalian.ito.action.ArticleAction">
+			<result type="json" />
+		</action>
+    </package>
+</struts>
