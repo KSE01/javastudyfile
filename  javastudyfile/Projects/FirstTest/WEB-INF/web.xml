@@ -16,7 +16,7 @@
     </filter-mapping>
     
     <welcome-file-list>
-        <welcome-file>/JSP/Login.html</welcome-file>
+        <welcome-file>/pages/MainPage.html</welcome-file>
     </welcome-file-list>
 
 </web-app>

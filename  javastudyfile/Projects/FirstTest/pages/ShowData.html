@@ -12,8 +12,11 @@
 			</tr>
 			<tr>
 				<td><input style="width:150px;" type="text" name="passWord" value="${passWord}"></td>
+			</tr>
+			<tr>
+				<td><input style="width:100px;" type="button" name="passWord" value="ShowMsg"></td>
 			</tr>			
-		</table>
+		</table><br><br><br><br><br>
 		<table border="1px">
 			<!-- ArrayList 分组功能 6个一组 不足的以‘-’填补--->
 			<#list arrayList?chunk(6, '-') as vals>
