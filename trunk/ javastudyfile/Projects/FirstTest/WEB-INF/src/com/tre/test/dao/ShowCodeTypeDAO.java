@@ -27,6 +27,7 @@ public class ShowCodeTypeDAO {
 			tempDTO.setShowFlg(rs.getString("ShowFlg"));
 			dtoList.add(tempDTO);
 		}
+		con.close();
 		return dtoList;
 	}
 }

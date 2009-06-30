@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN">
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<title>test</title>
+</head>
+<!--frameset rows="64,*,64"-->
+<frameset rows="150,*"">
+	<frame id="header" name="header" src="pages/header.html" scrolling="no" noresize>
+	<frame id="header" name="header" src="show.action" scrolling="no" noresize>
+<noframes>
+<pre id="p2">
+================================================================
+このヘッダー、フッターおよびコンテンツ フレームセットを完了するための手順
+1. "header" フレームに対して src="" ページの URL を追加します。
+2. "contents" フレームに対して src="" ページの URL を追加します。
+3. "main" フレームに対して src="" ページの URL を追加します。
+4. "footer" フレームに対して src="" ページの URL を追加します。
+5. BASE target="contents" 要素を "header" ページの HEAD に 
+	追加して、"contents" を既定フレームとして設定します。  
+	ここで、そのリンクでほかのページを表示します。
+6. BASE target="contents" 要素を "contents" ページの HEAD に 
+	追加して、"main" を既定フレームとして設定します。  
+	ここで、そのリンクでほかのページを表示します。 
+7. BASE target="contents" 要素を "footer" ページの HEAD に 
+	追加して、"contents" を既定フレームとして設定します。  
+	ここで、そのリンクでほかのページを表示します。
+================================================================
+</pre>
+<p id="p1">
+この HTML フレームセットは、複数の Web ページを表示します。このフレームセットを表示するには、
+HTML 4.0 以降のバージョンをサポートする Web ブラウザを使用してください。
+</p>
+</noframes>
+</frameset>
+</html>
