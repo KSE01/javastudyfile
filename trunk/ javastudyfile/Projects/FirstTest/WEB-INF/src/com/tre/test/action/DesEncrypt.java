@@ -42,7 +42,7 @@ public class DesEncrypt {
      * 密钥
      * 可随便定义更改
      */
-    private static final String encKey = "8WtAcJFMf9M"; 
+    private static final String ENCKEY = "8WtAcJFMf9M"; 
     //public static final String ALGORITHM = "DESede";   
     
     @SuppressWarnings("unchecked")
@@ -91,7 +91,7 @@ public class DesEncrypt {
      * @throws Exception  
      */  
     public static String initKey() throws Exception {   
-        return initKey(encKey);   
+        return initKey(ENCKEY);   
     }   
   
     /**  
@@ -141,8 +141,7 @@ public class DesEncrypt {
     /**  
      * 加密  
      *   
-     * @param srcStr  
-     * @param key  
+     * @param srcStr 
      * @return  
      * @throws Exception  
      */  
@@ -160,9 +159,8 @@ public class DesEncrypt {
     
     /**  
      * 解密  
-     *   
-     * @param data  
-     * @param key  
+     *
+     * @param srcStr  
      * @return  
      * @throws Exception  
      */  

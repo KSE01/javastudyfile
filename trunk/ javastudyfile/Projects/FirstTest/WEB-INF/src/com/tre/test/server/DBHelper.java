@@ -1,19 +1,23 @@
 package com.tre.test.server;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
 
 public class DBHelper {
 
 	private Connection con = null;
 
-	public String GetConnectionString() throws Exception {
+	public String getConnectionString() throws Exception {
 		XmlRead xmlRead = new XmlRead("WEB-INF\\NewFile.xml");
-		String url = xmlRead.GetNodeVal("/root/DataBase/url");
-		String serverName = xmlRead.GetNodeVal("/root/DataBase/serverName");
-		String dbName = xmlRead.GetNodeVal("/root/DataBase/dbName");
-		String portNum = xmlRead.GetNodeVal("/root/DataBase/portNumber");
-		String userName = xmlRead.GetNodeVal("/root/DataBase/userName");
-		String passWord = xmlRead.GetNodeVal("/root/DataBase/passWord");
+		String url = xmlRead.getNodeVal("/root/DataBase/url");
+		String serverName = xmlRead.getNodeVal("/root/DataBase/serverName");
+		String dbName = xmlRead.getNodeVal("/root/DataBase/dbName");
+		String portNum = xmlRead.getNodeVal("/root/DataBase/portNumber");
+		String userName = xmlRead.getNodeVal("/root/DataBase/userName");
+		String passWord = xmlRead.getNodeVal("/root/DataBase/passWord");
 
 		return url + serverName + ":" + portNum + ";databaseName=" + dbName
 				+ ";user=" + userName + ";password=" + passWord + ";";
@@ -22,7 +26,7 @@ public class DBHelper {
 	public Connection getConnection() {
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-			con = DriverManager.getConnection(GetConnectionString());
+			con = DriverManager.getConnection(getConnectionString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

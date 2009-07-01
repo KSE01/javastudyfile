@@ -35,7 +35,7 @@ public class XmlRead {
 	 * false：XML文件路径为绝对路径
 	 * @throws Exception
 	 */
-	public void SetXmlFilePath(String filePath,boolean virtualFlg) throws Exception{
+	public void setXmlFilePath(String filePath,boolean virtualFlg) throws Exception{
 		if(virtualFlg){
 			if(filePath.substring(0, 1).indexOf('\\')>0){
 				xmlFilePath = 	sysPath+filePath;
@@ -54,7 +54,7 @@ public class XmlRead {
 	 * @throws Exception
 	 */
 	
-	public InputSource GetInputSource() throws Exception{
+	public InputSource getInputSource() throws Exception{
 		if("".equals(xmlFilePath)){
 			throw new Exception("文件路径没有设置");
 		}
@@ -77,7 +77,7 @@ public class XmlRead {
 	 * @return <code>String<code> 节点的Text值
 	 * @throws Exception
 	 */
-	public String GetNodeVal(String xPath) throws Exception{
+	public String getNodeVal(String xPath) throws Exception{
 		if(null == xPath || "".equals(xPath)){
 			throw new Exception("节点路径不能为空");
 		}
@@ -85,7 +85,7 @@ public class XmlRead {
 		try{
 		XPath xpath = XPathFactory.newInstance().newXPath();
 		
-		InputSource inputSource = GetInputSource();
+		InputSource inputSource = getInputSource();
 		Node node = (Node) xpath.evaluate(xPath, inputSource, XPathConstants.NODE);
 		selNodeVal = node.getTextContent();
 		
@@ -101,14 +101,14 @@ public class XmlRead {
 	 * @return <code>NodeList<code> 节点
 	 * @throws Exception
 	 */
-	public NodeList GetNodes(String xPath) throws Exception{
+	public NodeList getNodes(String xPath) throws Exception{
 		NodeList selNodes = null;
 		if(null == xPath || "".equals(xPath)){
 			throw new Exception("节点路径不能为空");
 		}
 		try{
 			XPath xpath = XPathFactory.newInstance().newXPath();
-			InputSource inputSource = GetInputSource();
+			InputSource inputSource = getInputSource();
 			selNodes = (NodeList) xpath.evaluate(xPath, inputSource, XPathConstants.NODESET);
 		
 		} catch (Exception e){

@@ -7,18 +7,18 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
 public class ThreeDesEncrypt {
-	private static final String Algorithm = "DESede";
+	private static final String ALGORITHM = "DESede";
 	// 24字节的密钥
-	private static final String key = "ABCDEFGHIJKLMNOPQRSTUVWX";
+	private static final String KEY = "ABCDEFGHIJKLMNOPQRSTUVWX";
 	// 定义 加密算法,可用 DES,DESede,Blowfish
 	// keybyte为加密密钥，长度为24字节
 	// src为被加密的数据缓冲区（源）
 	public static byte[] encryptMode(byte[] src) {
 		try {
 			// 生成密钥
-			SecretKey deskey = new SecretKeySpec(key.getBytes(), Algorithm);
+			SecretKey deskey = new SecretKeySpec(KEY.getBytes(), ALGORITHM);
 			// 加密
-			Cipher c1 = Cipher.getInstance(Algorithm);
+			Cipher c1 = Cipher.getInstance(ALGORITHM);
 			c1.init(Cipher.ENCRYPT_MODE, deskey);
 			return c1.doFinal(src);
 		} catch (java.security.NoSuchAlgorithmException e1) {
@@ -33,9 +33,9 @@ public class ThreeDesEncrypt {
 	public static String encryptModea(byte[] src) {
 		try {
 			// 生成密钥
-			SecretKey deskey = new SecretKeySpec(key.getBytes(), Algorithm);
+			SecretKey deskey = new SecretKeySpec(KEY.getBytes(), ALGORITHM);
 			// 加密
-			Cipher c1 = Cipher.getInstance(Algorithm);
+			Cipher c1 = Cipher.getInstance(ALGORITHM);
 			c1.init(Cipher.ENCRYPT_MODE, deskey);
 			byte[] retByte = c1.doFinal(src);
 			return new String(retByte);
@@ -53,9 +53,9 @@ public class ThreeDesEncrypt {
 	public static byte[] decryptMode(byte[] src) {
 		try {
 			// 生成密钥
-			SecretKey deskey = new SecretKeySpec(key.getBytes(), Algorithm);
+			SecretKey deskey = new SecretKeySpec(KEY.getBytes(), ALGORITHM);
 			// 解密
-			Cipher c1 = Cipher.getInstance(Algorithm);
+			Cipher c1 = Cipher.getInstance(ALGORITHM);
 			c1.init(Cipher.DECRYPT_MODE, deskey);
 			return c1.doFinal(src);
 		} catch (java.security.NoSuchAlgorithmException e1) {
