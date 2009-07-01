@@ -1,17 +1,15 @@
 package com.tre.test.action;
 
-import java.security.Key;   
-import java.security.SecureRandom;   
-  
-import javax.crypto.Cipher;   
-import javax.crypto.KeyGenerator;   
-import javax.crypto.SecretKey;   
-import javax.crypto.SecretKeyFactory;   
-import javax.crypto.spec.DESKeySpec;  
+import java.security.Key;
+import java.security.SecureRandom;
+
+import javax.crypto.Cipher;
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
-import sun.misc.BASE64Decoder;   
-import sun.misc.BASE64Encoder; 
+import sun.misc.BASE64Decoder;
+import sun.misc.BASE64Encoder;
 
 public class DesEn {
 	/**  
@@ -154,7 +152,7 @@ public class DesEn {
 	  
 	        System.err.println("密钥:\t" + key);   
 	  
-	        byte[] inputData = inputStr.getBytes();   
+	        byte []inputData = inputStr.getBytes();   
 	        inputData = encrypt(inputData, key);   
 	        String ss = encryptBASE64(inputData);
 	        System.err.println("加密后:\t" + ss);   

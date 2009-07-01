@@ -34,8 +34,17 @@ public class DesTest {
 			
 			Map<String, List<String>> mapsd = new HashMap<String, List<String>>(); 
 			mapsd = DesEncrypt.getObjFromStr(strDec);
-			List<String> alsd = mapsd.get("wang");
-			System.out.println("反序列化   "+alsd.size());
+			List<String> tempList = mapsd.get("wang");
+			
+			for(int i=0;i<list.size();i++){
+				System.out.println("序列化前   "+list.get(i));
+			}
+			
+			for(int i=0;i<tempList.size();i++){
+				System.out.println("反序列化   "+tempList.get(i));
+			}
+			
+			
 			
 		} catch (java.lang.Exception e){
 			System.out.println(e.getMessage()+"w");
