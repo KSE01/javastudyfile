@@ -10,6 +10,9 @@ var hideSpeed = Math.ceil(100/20);
 var timeOut;
 
 function showMsgBox(msg){
+	if(timeOut){
+		clearTimeout(timeOut);
+	}
 	var msgBox = document.getElementById("hdiv_msgBox_comment");
 	if(msgBox.innerText || msgBox.innerText == ""){			
 		msgBox.innerText=msg;
