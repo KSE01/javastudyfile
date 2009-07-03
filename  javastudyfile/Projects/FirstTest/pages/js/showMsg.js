@@ -3,11 +3,11 @@ function showOperateMsg(msg){
 	try{
 		var obj = window.parent.frames[0];
 		obj.showMsgBox(msg);
-	} catch(e) {
-		//alert(e);
+	} catch(err) {
+		alert(err.description||err);
 	}
 }
 
 function showMsg(){
-	showOperateMsg("测试消息");
+	showOperateMsg("测消息测试消测消息测试消息测试测消息测试消息测试测消息测试消息测试测消息测试消息测试息测试消息");
 }
