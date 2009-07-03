@@ -14,6 +14,10 @@ function showMsgBox(msg){
 		clearTimeout(timeOut);
 	}
 	var msgBox = document.getElementById("hdiv_msgBox_comment");
+	if(msg){
+		var msgLen = msg.length;
+		msgBox.style.width=""+(msgLen*17)+"px";
+	}
 	if(msgBox.innerText || msgBox.innerText == ""){			
 		msgBox.innerText=msg;
 	} else {
@@ -45,7 +49,9 @@ function hideMsgBox(){
 	
 	//设定提示消息的状态 这个现在主要是导航页面在用	
 	//var msgObj = $("#hdivMsgBox");
-
+	var today = new Date();
+	var intSeconds = today.getSeconds();
+	document.getElementById("wang").innerHTML = intSeconds;
 	var msgObj = document.getElementById("hdivMsgBox");
 	var msgComObj = document.getElementById("hdiv_msgBox_comment");
 	if(msgOpacity == 100){
