@@ -8,6 +8,6 @@ function showOperateMsg(msg){
 	}
 }
 
-function showMsg(obj){
+function showMsg(){
 	showOperateMsg("测试消息");
 }
