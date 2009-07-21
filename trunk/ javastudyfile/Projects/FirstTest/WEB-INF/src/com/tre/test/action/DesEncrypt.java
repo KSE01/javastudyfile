@@ -4,7 +4,13 @@ import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.security.Key;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.Map;
 
 import javax.crypto.Cipher;
@@ -35,35 +41,15 @@ public class DesEncrypt {
      * SecretKeyFactory keyFactory = SecretKeyFactory.getInstance(ALGORITHM);  
      * SecretKey secretKey = keyFactory.generateSecret(dks);  
      * </code>  
-     */  
-    //private static final String ALGORITHM = "DES"; 
-    public static final String ALGORITHM = "DESede"; 
-    /**
-     * 密钥
-     * 可随便定义更改
-     */
-    private static final String ENCKEY = "8WtAcJFMf9M"; 
-    //public static final String ALGORITHM = "DESede";   
-    
-    @SuppressWarnings("unchecked")
-	public static String getStrFromObj(Map obj) throws Exception {
-    	ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        ObjectOutputStream oos = new ObjectOutputStream(baos);
-        oos.writeObject(obj);
-        String strValue = baos.toString("ISO-8859-1");
-        String encodedValue = java.net.URLEncoder.encode(strValue,"UTF-8");
-        return encodedValue;
-    }
-    
-	@SuppressWarnings("unchecked")
-	public static Map getObjFromStr(String str) throws Exception {
-	    String decoderValue = java.net.URLDecoder.decode(str,"UTF-8");
-	    //Cart result = new Cart();
-	    ByteArrayInputStream bais = new ByteArrayInputStream(decoderValue.getBytes("ISO-8859-1"));
-	    ObjectInputStream ios = new ObjectInputStream(bais);
-	    return (Map) ios.readObject();
-    }
-    /**  
+     */ 
+	private static final String ALGORITHM = "DESede"; 
+	
+	/**
+	 * 密钥
+	 */
+	private static final String ENCKEYSEED = "8WtAcJFMf9M"; 
+	
+	/**  
      * BASE64解码
      *   
      * @param key  
@@ -84,16 +70,7 @@ public class DesEncrypt {
     public static String encryptBASE64(byte[] key) throws Exception {   
         return (new BASE64Encoder()).encodeBuffer(key);   
     } 
-    /**  
-     * 生成密钥  
-     * 如果没有定义则使用默认的字符串生成密钥
-     * @return  
-     * @throws Exception  
-     */  
-    public static String initKey() throws Exception {   
-        return initKey(ENCKEY);   
-    }   
-  
+    
     /**  
      * 生成密钥  
      *   
@@ -101,16 +78,10 @@ public class DesEncrypt {
      * @return  
      * @throws Exception  
      */  
-    public static String initKey(String seed) throws Exception {   
-        SecureRandom secureRandom = null;   
+    private static String initKey() throws Exception {   
+        SecureRandom secureRandom =  new SecureRandom(decryptBASE64(ENCKEYSEED));
   
-        if (seed != null) {   
-            secureRandom = new SecureRandom(decryptBASE64(seed));   
-        } else {   
-            secureRandom = new SecureRandom();   
-        }   
-  
-        KeyGenerator kg = KeyGenerator.getInstance(ALGORITHM);   
+        KeyGenerator kg = KeyGenerator.getInstance("DESede");   
         kg.init(secureRandom);   
   
         SecretKey secretKey = kg.generateKey();   
@@ -139,13 +110,13 @@ public class DesEncrypt {
         return secretKey;   
     }   
     /**  
-     * 加密  
+     * DES加密  
      *   
      * @param srcStr 
      * @return  
      * @throws Exception  
      */  
-    public static String encrypt(String srcStr) throws Exception {
+    public static String desEncrypt(String srcStr) throws Exception {
     	String strKey = initKey();
     	
     	Key k = toKey(decryptBASE64(strKey));
@@ -158,13 +129,13 @@ public class DesEncrypt {
     }
     
     /**  
-     * 解密  
+     * DES解密  
      *
      * @param srcStr  
      * @return  
      * @throws Exception  
      */  
-    public static String decrypt(String srcStr) throws Exception {   
+    public static String desDecrypt(String srcStr) throws Exception {   
     	String strKey = initKey();
     	
     	Key k = toKey(decryptBASE64(strKey));
@@ -175,5 +146,54 @@ public class DesEncrypt {
         byte[] str64Dec = decryptBASE64(srcStr);
         byte[] strDec = cipher.doFinal(str64Dec);
         return new String(strDec);  
-    }     
+    }
+    
+    /**
+     * 根据传入的字符串生成其MD5码
+     * @param plainText
+     * @return
+     */
+	public static String getMd5(String plainText) {
+		String pwd = "";
+		try {
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			md.update(plainText.getBytes());
+			byte b[] = md.digest();
+			int i;
+			StringBuffer buf = new StringBuffer("");
+			for (int offset = 0; offset < b.length; offset++) {
+				i = b[offset];
+				if (i < 0)
+					i += 256;
+				if (i < 16)
+					buf.append("0");
+				buf.append(Integer.toHexString(i));
+			}
+			pwd = buf.toString();
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		return pwd;
+	}
+
+	/**
+	 * 取得一个理论上的唯一值
+	 * @return 一个数字字符串
+	 */
+	public static String getUniqueId() {
+		// 时间格式
+		DateFormat format = new SimpleDateFormat("yyyyMMdd");
+
+		// 获得当前时间
+		Calendar nowTime = new GregorianCalendar();
+		long totalMillis = nowTime.getTimeInMillis();
+		String strTotalMillis = String.format("%014d", totalMillis);
+		String strYMD = format.format(nowTime.getTime());
+		
+		// 生成5位随机数
+		String strRandomNum = String.format("%04.0f", Math.random() * 10000);
+
+		//年月日在存文件时使用
+		return strYMD + strTotalMillis + strRandomNum;
+	}
 }

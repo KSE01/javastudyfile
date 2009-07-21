@@ -11,39 +11,43 @@ public class DesTest {
 	@SuppressWarnings("unchecked")
 	public static void main(String[] args) {
 		try{	
+//			// 获得当前时间
+//			int max=1;
+//			int min = 10000;
+//			for(int i=0;i<100;i++){
+//				// 时间格式
+//				DateFormat format = new SimpleDateFormat("yyyyMMdd");
+//
+//				// 获得当前时间
+//				Calendar nowTime = new GregorianCalendar();
+//				long totalMillis = nowTime.getTimeInMillis();
+//				String strTotalMillis = String.format("%014d", totalMillis);
+//				String strYMD = format.format(nowTime.getTime());
+//				
+//				// 生成5位随机数
+//				String strRandomNum = String.format("%04.0f", Math.random() * 10000);
+//
+//				// 最后的生成的唯一值 因为上面对总秒数格式化后前面有0 因此在最前面增加一个1
+//				String a = strYMD + strTotalMillis + strRandomNum;
+//				
+////				String a = "1"+strTotalMillis + strRandomNum;
+//				System.out.println(a);
+//				
+//			}
+			
 			///////////////////////////////////
-			List<String> list = new ArrayList<String>();
-			list.add("wer1");
-			list.add("wer2");
-			list.add("wer3");
-			list.add("wer4");
-			list.add(null);
-			Map<String, List<String>> mapList = new HashMap<String, List<String>>(); 
-			mapList.put("wang", list);
+			String asd = "wangwentao";
 			
-			String strObj = DesEncrypt.getStrFromObj(mapList);
-			System.out.println("序列化   "+strObj);
+			String aaa = DesEncrypt.desEncrypt(asd);
+			System.out.println(aaa);
 			
-			System.out.println("原始数据        "+strObj);
+			String aab = DesEncrypt.desDecrypt(aaa);
+			System.out.println(aab);
 			
-			String strEnc = DesEncrypt.encrypt(strObj);			
-			System.out.println("加密后数据   "+strEnc);
-
-			String strDec = DesEncrypt.decrypt(strEnc);	
-			System.out.println("解密后数据   "+strDec);
+			String aac = DesEncrypt.getMd5(asd);
+			System.out.println(aac);
 			
-			Map<String, List<String>> mapsd = new HashMap<String, List<String>>(); 
-			mapsd = DesEncrypt.getObjFromStr(strDec);
-			List<String> tempList = mapsd.get("wang");
-			
-			for(int i=0;i<list.size();i++){
-				System.out.println("序列化前   "+list.get(i));
-			}
-			
-			for(int i=0;i<tempList.size();i++){
-				System.out.println("反序列化   "+tempList.get(i));
-			}
-			
+			System.out.println(DesEncrypt.getUniqueId());
 			
 			
 		} catch (java.lang.Exception e){
